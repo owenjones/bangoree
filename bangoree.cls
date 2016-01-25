@@ -111,7 +111,7 @@ footskip=1cm
              urldate=long, %  - display type for dates
              style=ieee,
              citestyle=numeric,%
-             sorting=nyt
+             sorting=none
         ]{biblatex}
      }{%
      \RequirePackage[     % use biblatex for bibliography
@@ -122,7 +122,7 @@ footskip=1cm
          backref=true, %  - activate backrefs
          urldate=long, %  - display type for dates
          style=ieee,
-         sorting=nyt
+         sorting=none
     ]{biblatex}
      }
 
