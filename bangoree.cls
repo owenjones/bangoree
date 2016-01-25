@@ -227,8 +227,8 @@ arg1=#1, arg2=#2, arg3=#3%
 
 \newcommand{\thesispartlabelfont}{\book\fontsize{60}{60}\selectfont}
 \newcommand{\thesispartfont}{\huge\selectfont}
-\newcommand{\thesischapterfont}{\huge\selectfont}
-\newcommand{\thesissectionfont}{\LARGE\bfseries}
+\newcommand{\thesischapterfont}{\huge\selectfont\raggedright}
+\newcommand{\thesissectionfont}{\LARGE\bfseries\raggedright}
 \newcommand{\thesissubsectionfont}{\Large}
 \newcommand{\thesisparagraphfont}{\small\bfseries}
 
@@ -3667,6 +3667,7 @@ Degree of \degree\ in \@scheme.\par
         \cleardoublepage
         \pdfbookmark[0]{Abstract}{Abstract}
         \chapter*{\abstractname}\label{chp:abstract}
+        \setstretch{1.5}
     }
     {}
 
@@ -3675,6 +3676,7 @@ Degree of \degree\ in \@scheme.\par
     \cleardoublepage
     \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
     \chapter*{Acknowledgements}
+    \setstretch{1.5}
     \label{chp:acknowledgement}
     \if\relax\detokenize{#1}\relax\else
     \chapterquote{#1}{#2}{\ }
