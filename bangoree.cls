@@ -3636,12 +3636,12 @@ Degree of \degree\ in \@scheme.\par
     }
 }
 
-% FIGURES PAGE
+% FIGURES/TABLES/CONTENTS PAGES
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
     \cleardoublepage
     \setcounter{tocdepth}{3}
-    {\setstretch{1.2}
+    {\setstretch{1.4}
     \tableofcontents
     \iftotalfigures
         \cleardoublepage
@@ -3653,8 +3653,9 @@ Degree of \degree\ in \@scheme.\par
     \fi}
 }
 
-% CONTENTS PAGE
+% TRIGGERS MAIN CONTENT STYLE
 \newcommand{\thesisContent}{%
+	\setstretch{1.5}
     \cleardoublepage
     \pagenumbering{arabic}
     \setcounter{page}{1}
