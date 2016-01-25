@@ -1,1 +1,1 @@
-ÂÂ# BangorEE
+# BangorEE
