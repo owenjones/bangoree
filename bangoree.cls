@@ -1,8 +1,12 @@
-% "Borrowed" from Cameron.. #sorrynotsorry.
+% BangorEE - (an unofficial) Bangor Electronic Engineering Dissertation LaTeX Class.
+
+% This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
+% official Computer Science Thesis LaTeX Class.
+
 \def\version{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bangoree}[2016/01/23 \version]
+\ProvidesClass{bangoree}[2016/01/26 \version]
 
 \def\degreeScheme#1{\def\@scheme{#1}}
 \RequirePackage{fifo-stack}
@@ -100,43 +104,44 @@ bottom=20mm,
 footskip=1cm
 ]{geometry}
 
-\DeclareDocumentCommand{\bibliographySetup}{ O{} }{%
-     \ifthenelse{\equal{#1}{compressed}}{%
-         \RequirePackage[     % use biblatex for bibliography
-             backend=biber, %  - use biber backend (bibtex replacement) or bibtex
-             bibencoding=utf8, %  - use auto file encode
-             natbib=true,     %  - allow natbib commands
-             hyperref=true, %  - activate hyperref support
-             backref=true, %  - activate backrefs
-             urldate=long, %  - display type for dates
+\DeclareDocumentCommand{\bibliographySetup}{ O{} }{
+     \ifthenelse{\equal{#1}{compressed}}{
+         \RequirePackage[
+             backend=biber,
+             bibencoding=utf8,
+             natbib=true,
+             hyperref=true,
+             backref=true,
+             urldate=long,
              style=ieee,
-             citestyle=numeric,%
+             citestyle=numeric,
              sorting=none
         ]{biblatex}
-     }{%
-     \RequirePackage[     % use biblatex for bibliography
-         backend=biber, %  - use biber backend (bibtex replacement) or bibtex
-         bibencoding=utf8, %  - use auto file encode
-         natbib=true,     %  - allow natbib commands
-         hyperref=true, %  - activate hyperref support
-         backref=true, %  - activate backrefs
-         urldate=long, %  - display type for dates
+     }{
+     \RequirePackage[
+         backend=biber,
+         bibencoding=utf8,
+         natbib=true,
+         hyperref=true,
+         backref=true,
+         urldate=long,
          style=ieee,
          sorting=none
     ]{biblatex}
      }
 
     \DefineBibliographyStrings{english} {
-        backrefpage  = {p.}, % for single page number
-        backrefpages = {pp.},% for multiple page numbers
+        backrefpage  = {p.},
+        backrefpages = {pp.},
         bibliography = {References}
     }
 }
 
-\DeclareDocumentCommand{\references}{ O{} }{%
+% References layout
+\DeclareDocumentCommand{\references}{ O{} }{
     \appendix
     {
-        \ifthenelse{\equal{#1}{small}}{%
+        \ifthenelse{\equal{#1}{small}}{
          \renewcommand*{\bibfont}{\footnotesize}
      \linespread{1.0}
      \setlength\itemsep{1ex}
@@ -148,26 +153,24 @@ footskip=1cm
 }
 
 \setstretch{1}
-\clubpenalty = 10000 % prevent single lines at the beginning of a paragraph
-\widowpenalty = 10000 % prevent single lines at the end of a paragraph
-\displaywidowpenalty = 10000 %
-
-\definecolor{coloursgraylight}{gray}{.8}
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
 
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{%
-\markboth{%
-\footnotesize%
-{#1}%
-}{}%
+\renewcommand{\chaptermark}[1]{
+\markboth{
+\footnotesize
+{#1}
+}{}
 }
-\renewcommand{\sectionmark}[1]{%
-\markright{%
-\footnotesize%
-{\textbf{\thesection}}%
-\quad%
-{#1}%
-}%
+\renewcommand{\sectionmark}[1]{
+\markright{
+\footnotesize
+{\textbf{\thesection}}
+\quad
+{#1}
+}
 }
 
 % Footer for non-content pages (abstract etc)
@@ -178,14 +181,14 @@ footskip=1cm
     \renewcommand{\footrulewidth}{0pt}
 
     \fancyfootoffset[RO]{1.75cm}
-    \fancyfoot[RO]{%
-        \footnotesize%
-        \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
+    \fancyfoot[RO]{
+        \footnotesize
+        \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
     }
 
      \fancyfootoffset[LE]{1.75cm}
-    \fancyfoot[LE]{%
-        \footnotesize%
+    \fancyfoot[LE]{
+        \footnotesize
         \makebox[1.4cm][l]{\textbf{\thepage}}\hspace*{9pt}
     }
 }
@@ -198,30 +201,30 @@ footskip=1cm
     \renewcommand{\footrulewidth}{0pt}
 
 \fancyfootoffset[RO]{1.75cm}
-    \fancyfoot[RO]{%
-        \footnotesize%
+    \fancyfoot[RO]{
+        \footnotesize
         \leftmark\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
     }
 
      \fancyfootoffset[LE]{1.75cm}
-    \fancyfoot[LE]{%
-        footnotesize%
+    \fancyfoot[LE]{
+        footnotesize
         \makebox[1.4cm][l]{\textbf{\thepage}}\hspace*{9pt}\rightmark
     }
 }
 
-% CAPTION SETUP
-\RequirePackage[ % modify figure and table captions
+% Caption Setup
+\RequirePackage[
 font={small},
 labelfont=bf,
 labelsep=\bangorcs@figuresep
 ]{caption}
 
-\newcommand*{\ctSetFont}[3]{%
-arg1=#1, arg2=#2, arg3=#3%
+\newcommand*{\ctSetFont}[3]{
+arg1=#1, arg2=#2, arg3=#3
 }
 
-% FONT SETUP
+% Font Setup
 \newcommand{\helv}{\fontsize{9}{11}\selectfont}
 \newcommand{\book}{\fontseries{m}\fontsize{11}{13}\selectfont}
 
@@ -237,7 +240,7 @@ arg1=#1, arg2=#2, arg3=#3%
 \titleformat{\chapter}[display]
 {\huge\thesischapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 
-\titlespacing*{\chapter} {0pt}{2mm}{10mm}
+\titlespacing*{\chapter} {0pt}{2mm}{6mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
@@ -247,9 +250,9 @@ arg1=#1, arg2=#2, arg3=#3%
 \renewcommand{\cftloftitlefont}{\thesischapterfont}
 \renewcommand{\cftlottitlefont}{\thesischapterfont}
 
-% BANGOR LOGO
+% Bangor Logo
 \RequirePackage{tikz,forloop}
-\newcommand{\bangorlogo}{%
+\newcommand{\bangorlogo}{
 \definecolor{c231f20}{RGB}{35,31,32}
 \definecolor{cb91930}{RGB}{185,25,48}
 \definecolor{cf9ae0c}{RGB}{249,174,12}
@@ -3526,24 +3529,24 @@ arg1=#1, arg2=#2, arg3=#3%
 \end{tikzpicture}
 }
 
-\renewcommand{\maketitle}{%
-\hypersetup{ % setup the hyperref-package options
-pdftitle={\@title}, %  - title (PDF meta)
-pdfsubject={\@scheme},%  - subject (PDF meta)
-pdfauthor={\@author}, %  - author (PDF meta)
-plainpages=false, %  -
-pdfborder={0 0 0}, %  -
-breaklinks=true, %  - allow line break inside links
-bookmarksnumbered=true, %
-bookmarksopen=true %
+% PDF Setup
+\renewcommand{\maketitle}{
+\hypersetup{
+pdftitle={\@title},
+pdfsubject={\@scheme},
+pdfauthor={\@author},
+plainpages=false,
+pdfborder={0 0 0},
+breaklinks=true,
+bookmarksnumbered=true,
+bookmarksopen=true
 }
 
-\pagenumbering{gobble} % gobble page numbing (invisible for empty page style)
-\pagestyle{empty} % no header or footers
+\pagenumbering{gobble}
+\pagestyle{empty}
 
-% FRONT PAGE
+% Title Page
 \begin{titlepage}
-
 \pdfbookmark[0]{Title Page}{Title Page}
 \centering
 
@@ -3573,7 +3576,7 @@ Degree of \degree\ in \@scheme.\par
 
 \ifnum \FSSize{supervisors}>1 \textit{Supervisors} \else \textit{Supervisor} \fi
 \newcounter{l}
-\forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{%
+\forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{
 \FSBottom{supervisors}\FSShift{supervisors}\ifnum \FSSize{supervisors}>0 \ \textit{and} \fi}
 
 \vspace{0.8cm}
@@ -3583,12 +3586,12 @@ Degree of \degree\ in \@scheme.\par
 \end{titlepage}
 }
 
-% STATEMENTS PAGE
+% Statements Page
 \RequirePackage{framed}
-\DeclareDocumentCommand{\statements}{ O{} }{%
+\DeclareDocumentCommand{\statements}{ O{} }{
     \pagestyle{plain}
     \pagenumbering{roman}
-    \ifthenelse{\equal{#1}{}}{%
+    \ifthenelse{\equal{#1}{}}{
         \newcommand{\sig}{\vspace{2cm}}
     }{%
         \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
@@ -3636,7 +3639,7 @@ Degree of \degree\ in \@scheme.\par
     }
 }
 
-% FIGURES/TABLES/CONTENTS PAGES
+% Figures/Tables/Contents Pages
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
     \cleardoublepage
@@ -3653,8 +3656,8 @@ Degree of \degree\ in \@scheme.\par
     \fi}
 }
 
-% TRIGGERS MAIN CONTENT STYLE
-\newcommand{\thesisContent}{%
+% Switch context to main content body
+\newcommand{\thesisContent}{
 	\setstretch{1.5}
     \cleardoublepage
     \pagenumbering{arabic}
@@ -3662,7 +3665,7 @@ Degree of \degree\ in \@scheme.\par
     \pagestyle{maincontentstyle}
 }
 
-% ABSTRACT
+% Abstract
 \renewenvironment{abstract}
     {
         \cleardoublepage
@@ -3672,8 +3675,8 @@ Degree of \degree\ in \@scheme.\par
     }
     {}
 
-% ACKNOWLEDGEMENTS PAGE
-\DeclareDocumentCommand{\acknowledgements}{ O{} O{} m }{%
+% Acknowledgements
+\DeclareDocumentCommand{\acknowledgements}{ O{} O{} m }{
     \cleardoublepage
     \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
     \chapter*{Acknowledgements}
