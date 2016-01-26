@@ -1,4 +1,3 @@
-% vim: syntax=tex
 % "Borrowed" from Cameron.. #sorrynotsorry.
 \def\version{0.1}
 
