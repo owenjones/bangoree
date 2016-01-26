@@ -1,10 +1,12 @@
 \documentclass[beng,nohyphen,noindent]{bangoree}
 
+\usepackage{lipsum} % Just to create some filler content
+
 \title{Dissertation Title}
 \author{Your Name}
 \degreeScheme{Electronic Engineering}
 \date{May, 2016}
-\supervisor{Your Superviser}
+\supervisor{Your Supervisor}
 
 \bibliographySetup
 %\addbibresource{references.bib}
@@ -12,17 +14,31 @@
 \begin{document}
 \maketitle
 \statements
-\abstract{Your abstract}
-\acknowledgements{Whoever you wish to acknowledge}
+\abstract{\lipsum[90-92]}
+\acknowledgements{\lipsum[1]}
 \tables
 
 \thesisContent
 \chapter{Introduction}
+\lipsum[1-9]
 
 \chapter{Background}
+\lipsum[10-14]
 
 \chapter{Methodology}
-% etc. etc.
+\section{Experiment 1}
+\lipsum[20-22]
+\section{Experiment 2}
+\lipsum[22-24]
+
+\chapter{Results}
+\lipsum[50-53]
+
+\chapter{Discussion}
+\lipsum[55-58]
+
+\chapter{Conclusion}
+\lipsum[60]
 
 \references
 \end{document}
