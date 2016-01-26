@@ -1,5 +1,5 @@
 % "Borrowed" from Cameron.. #sorrynotsorry.
-\def\version{0.1a}
+\def\version{0.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/01/23 \version]
