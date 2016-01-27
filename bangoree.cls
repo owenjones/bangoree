@@ -188,7 +188,6 @@ labelsep=endash
 
 % Font Setup
 \newcommand{\chapterfont}{\huge\selectfont\raggedright}
-\newcommand{\sectionfont}{\large\selectfont\raggedright}
 
 \RequirePackage{titlesec}
 
@@ -196,8 +195,8 @@ labelsep=endash
 {\huge\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 
 \titlespacing*{\chapter}{0pt}{2mm}{4mm}
-\titlespacing*{\section}{0pt}{0mm}{-2mm}
-\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
+%\titlespacing*{\section}{0pt}{0mm}{-2mm}
+%\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
