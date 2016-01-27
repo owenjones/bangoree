@@ -23,7 +23,7 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``\statements`` - Creates the statements page, using the name specified as the dissertation author
 * ``\abstract{<abstract>}`` - Creates an abstract page.
 * ``\acknowledgements{<acknowledgements>}`` - Creates an acknowledgements page.
-* ``\course{<Electronic Engineering|Computer Systems Engineering>}`` - Sets the name of your degree scheme, which is printed verbatim on the title page.
+* ``\course{<Electronic Engineering|Computer Systems Engineering>}`` - Sets the name of your course, which is printed on the title page.
 * ``\supervisor{<supervisor>}`` - Adds a supervisor. For multiple supervisors call this macro multiple times.
 * ``\tables`` - Generates the contents, figures, and tables pages.
 * ``\bibinit`` and ``\addbibresource{<bibliography>}`` - Setup the bibliography.
