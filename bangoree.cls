@@ -8,11 +8,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/01/26 \version]
 
-\def\degreeScheme#1{\def\@scheme{#1}}
-\RequirePackage{fifo-stack}
-\FSCreate{supervisors}{}
-\def\supervisor#1{\FSPush{supervisors}{#1}}
-
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
 \RequirePackage[dvipsnames]{xcolor}
@@ -23,18 +18,17 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{xparse}
 
-\DeclareOption{bsc}{
-\newcommand{\degree}{Bachelor of Science}
-}
-\DeclareOption{msc}{
-\newcommand{\degree}{Master of Science}
-}
-\DeclareOption{beng}{
-\newcommand{\degree}{Bachelor of Engineering}
-}
-\DeclareOption{meng}{
-\newcommand{\degree}{Master of Engineering}
-}
+\def\degreeScheme#1{\def\@scheme{#1}}
+
+\RequirePackage{fifo-stack}
+
+\FSCreate{supervisors}{}
+\def\supervisor#1{\FSPush{supervisors}{#1}}
+
+\DeclareOption{bsc}{\newcommand{\degree}{Bachelor of Science}}
+\DeclareOption{msc}{\newcommand{\degree}{Master of Science}}
+\DeclareOption{beng}{\newcommand{\degree}{Bachelor of Engineering}}
+\DeclareOption{meng}{\newcommand{\degree}{Master of Engineering}}
 
 \newboolean{@draft}
 \setboolean{@draft}{false}
@@ -48,17 +42,10 @@
 \setboolean{@noindent}{false}
 \DeclareOption{noindent}{\setboolean{@noindent}{true}}
 
-\define@choicekey*{bangorcs}{figuresep}{none,colon,period,space,quad,newline,endash}[colon]{\def\bangorcs@figuresep{#1}}
-\setkeys{bangorcs}{figuresep=colon}
-
-\DeclareOption{twoside}{
-\PassOptionsToClass{\CurrentOption}{report}
-}
-
 \ProcessOptions\relax
 
 \ifx\degree\undefined
-    \ClassError{bangoree}{A degree type option has not been defined; use bsc, msc, beng or meng in the class options.}
+    \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
 \fi
 
 \LoadClass[12pt]{report}
@@ -88,9 +75,9 @@
     \RequirePackage{indentfirst}
 \fi
 
-\RequirePackage{graphicx,url,csquotes,fixltx2e,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
+\RequirePackage{graphicx,url,microtype,setspace,fancyhdr,enumitem,csquotes,amsmath,mathptmx}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
-\RequirePackage[nameinlink,capitalize]{cleveref}
+\RequirePackage[nameinlink,capitalise]{cleveref}
 
 \RequirePackage[
 paper=a4paper,
@@ -104,20 +91,8 @@ bottom=20mm,
 footskip=1cm
 ]{geometry}
 
-\DeclareDocumentCommand{\bibliographySetup}{ O{} }{
-     \ifthenelse{\equal{#1}{compressed}}{
-         \RequirePackage[
-             backend=biber,
-             bibencoding=utf8,
-             natbib=true,
-             hyperref=true,
-             backref=true,
-             urldate=long,
-             style=ieee,
-             citestyle=numeric,
-             sorting=none
-        ]{biblatex}
-     }{
+% References Setup
+\DeclareDocumentCommand{\bibinit}{ O{} }{
      \RequirePackage[
          backend=biber,
          bibencoding=utf8,
@@ -128,7 +103,6 @@ footskip=1cm
          style=ieee,
          sorting=none
     ]{biblatex}
-     }
 
     \DefineBibliographyStrings{english} {
         backrefpage  = {p.},
@@ -137,18 +111,19 @@ footskip=1cm
     }
 }
 
-% References layout
+% Trigger references page
 \DeclareDocumentCommand{\references}{ O{} }{
     \appendix
     {
-        \ifthenelse{\equal{#1}{small}}{
-         \renewcommand*{\bibfont}{\footnotesize}
-     \linespread{1.0}
-     \setlength\itemsep{1ex}
-     \setlength\bibitemsep{0.7\itemsep}
+    \ifthenelse{\equal{#1}{small}}{
+    	\renewcommand*{\bibfont}{\footnotesize}
+     	\linespread{1.0}
+     	\setlength\itemsep{1ex}
+     	\setlength\bibitemsep{0.7\itemsep}
      }{}
-        \pagestyle{maincontentstyle}
-        \printbibliography[heading=bibnumbered]
+
+    \pagestyle{maincontentstyle}
+    \printbibliography[heading=bibnumbered]
     }
 }
 
@@ -180,16 +155,10 @@ footskip=1cm
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
 
-    \fancyfootoffset[RO]{1.75cm}
-    \fancyfoot[RO]{
+    \fancyfootoffset[R]{1.75cm}
+    \fancyfoot[R]{
         \footnotesize
         \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
-    }
-
-     \fancyfootoffset[LE]{1.75cm}
-    \fancyfoot[LE]{
-        \footnotesize
-        \makebox[1.4cm][l]{\textbf{\thepage}}\hspace*{9pt}
     }
 }
 
@@ -200,24 +169,18 @@ footskip=1cm
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
 
-\fancyfootoffset[RO]{1.75cm}
-    \fancyfoot[RO]{
+\fancyfootoffset[R]{1.75cm}
+    \fancyfoot[R]{
         \footnotesize
         \leftmark\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
-    }
-
-     \fancyfootoffset[LE]{1.75cm}
-    \fancyfoot[LE]{
-        footnotesize
-        \makebox[1.4cm][l]{\textbf{\thepage}}\hspace*{9pt}\rightmark
-    }
+	}
 }
 
 % Caption Setup
 \RequirePackage[
 font={small},
 labelfont=bf,
-labelsep=\bangorcs@figuresep
+labelsep=endash
 ]{caption}
 
 \newcommand*{\ctSetFont}[3]{
@@ -225,30 +188,25 @@ arg1=#1, arg2=#2, arg3=#3
 }
 
 % Font Setup
-\newcommand{\helv}{\fontsize{9}{11}\selectfont}
-\newcommand{\book}{\fontseries{m}\fontsize{11}{13}\selectfont}
-
-\newcommand{\thesispartlabelfont}{\book\fontsize{60}{60}\selectfont}
-\newcommand{\thesispartfont}{\huge\selectfont}
-\newcommand{\thesischapterfont}{\huge\selectfont\raggedright}
-\newcommand{\thesissectionfont}{\LARGE\bfseries\raggedright}
-\newcommand{\thesissubsectionfont}{\Large}
-\newcommand{\thesisparagraphfont}{\small\bfseries}
+\newcommand{\chapterfont}{\huge\selectfont\raggedright}
+\newcommand{\sectionfont}{\LARGE\bfseries\raggedright}
+\newcommand{\subsectionfont}{\Large}
+\newcommand{\paragraphfont}{\small\bfseries}
 
 \RequirePackage{titlesec}
 
 \titleformat{\chapter}[display]
-{\huge\thesischapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
+{\huge\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 
-\titlespacing*{\chapter} {0pt}{2mm}{6mm}
+\titlespacing*{\chapter}{0pt}{2mm}{6mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
 \cftsetindents{table}{0em}{3em}
 
-\renewcommand{\cfttoctitlefont}{\thesischapterfont}
-\renewcommand{\cftloftitlefont}{\thesischapterfont}
-\renewcommand{\cftlottitlefont}{\thesischapterfont}
+\renewcommand{\cfttoctitlefont}{\chapterfont}
+\renewcommand{\cftloftitlefont}{\chapterfont}
+\renewcommand{\cftlottitlefont}{\chapterfont}
 
 % Bangor Logo
 \RequirePackage{tikz,forloop}
@@ -3577,7 +3535,7 @@ Degree of \degree\ in \@scheme.\par
 \ifnum \FSSize{supervisors}>1 \textit{Supervisors} \else \textit{Supervisor} \fi
 \newcounter{l}
 \forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{
-\FSBottom{supervisors}\FSShift{supervisors}\ifnum \FSSize{supervisors}>0 \ \textit{and} \fi}
+\FSBottom{supervisors}\FSShift{supervisors}\ifnum \FSSize{supervisors}>0 \ \textit{and}\fi}
 
 \vspace{0.8cm}
 
@@ -3593,7 +3551,7 @@ Degree of \degree\ in \@scheme.\par
     \pagenumbering{roman}
     \ifthenelse{\equal{#1}{}}{
         \newcommand{\sig}{\vspace{2cm}}
-    }{%
+    }{
         \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
     }
     \cleardoublepage
@@ -3613,7 +3571,7 @@ Degree of \degree\ in \@scheme.\par
 
         \vspace{0.3cm}
 
-        \noindent Students:
+        \noindent Student:
 
         \sig
 
@@ -3629,7 +3587,7 @@ Degree of \degree\ in \@scheme.\par
 
         \vspace{0.3cm}
 
-        \noindent Students:
+        \noindent Student:
 
         \sig
 
@@ -3657,7 +3615,7 @@ Degree of \degree\ in \@scheme.\par
 }
 
 % Switch context to main content body
-\newcommand{\thesisContent}{
+\newcommand{\content}{
 	\setstretch{1.5}
     \cleardoublepage
     \pagenumbering{arabic}
@@ -3676,16 +3634,13 @@ Degree of \degree\ in \@scheme.\par
     {}
 
 % Acknowledgements
-\DeclareDocumentCommand{\acknowledgements}{ O{} O{} m }{
+\DeclareDocumentCommand{\acknowledgements}{ m }{
     \cleardoublepage
     \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
     \chapter*{Acknowledgements}
     \setstretch{1.5}
     \label{chp:acknowledgement}
-    \if\relax\detokenize{#1}\relax\else
-    \chapterquote{#1}{#2}{\ }
-    \fi
 
-    #3
+    #1
 }
 \endinput
