@@ -66,7 +66,7 @@
 \fi
 
 \RequirePackage{parskip}
-\setlength{\parskip}{1.5em}
+\setlength{\parskip}{1.25em}
 
 \if@noindent
   \setlength{\parindent}{0in}
@@ -75,7 +75,7 @@
   \RequirePackage{indentfirst}
 \fi
 
-\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
+\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx,setspace}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 
@@ -188,13 +188,16 @@ labelsep=endash
 
 % Font Setup
 \newcommand{\chapterfont}{\huge\selectfont\raggedright}
+\newcommand{\sectionfont}{\large\selectfont\raggedright}
 
 \RequirePackage{titlesec}
 
 \titleformat{\chapter}[display]
 {\huge\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 
-\titlespacing*{\chapter}{0pt}{2mm}{6mm}
+\titlespacing*{\chapter}{0pt}{2mm}{4mm}
+\titlespacing*{\section}{0pt}{0mm}{-2mm}
+\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
