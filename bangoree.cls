@@ -18,7 +18,7 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{xparse}
 
-\def\degreeScheme#1{\def\@scheme{#1}}
+\def\course#1{\def\@scheme{#1}}
 
 \RequirePackage{fifo-stack}
 
@@ -45,86 +45,86 @@
 \ProcessOptions\relax
 
 \ifx\degree\undefined
-    \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
+  \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
 \fi
 
 \LoadClass[12pt]{report}
 
 \if@draft
-    \SetWatermarkText{DRAFT}
-    \SetWatermarkScale{1}
+  \SetWatermarkText{DRAFT}
+  \SetWatermarkScale{1}
 \else
-    \SetWatermarkText{}
+  \SetWatermarkText{}
 \fi
 
 \if@nohyphen
-    \tolerance=1
-    \sloppy
-    \emergencystretch=\maxdimen
-    \hyphenpenalty=10000
-    \hbadness=10000
+  \tolerance=1
+  \sloppy
+  \emergencystretch=\maxdimen
+  \hyphenpenalty=10000
+  \hbadness=10000
 \fi
 
 \RequirePackage{parskip}
 \setlength{\parskip}{1.5em}
 
 \if@noindent
-    \setlength{\parindent}{0in}
+  \setlength{\parindent}{0in}
 \else
-    \setlength{\parindent}{15pt}
-    \RequirePackage{indentfirst}
+  \setlength{\parindent}{15pt}
+  \RequirePackage{indentfirst}
 \fi
 
-\RequirePackage{graphicx,url,microtype,setspace,fancyhdr,enumitem,csquotes,amsmath,mathptmx}
+\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 
 \RequirePackage[
-paper=a4paper,
-nohead,
-includefoot,
-bindingoffset=15mm,
-top=20mm,
-left=20mm,
-right=20mm,
-bottom=20mm,
-footskip=1cm
+  paper=a4paper,
+  nohead,
+  includefoot,
+  bindingoffset=15mm,
+  top=20mm,
+  left=20mm,
+  right=20mm,
+  bottom=20mm,
+  footskip=1cm
 ]{geometry}
 
 % References Setup
 \DeclareDocumentCommand{\bibinit}{ O{} }{
-     \RequirePackage[
-         backend=biber,
-         bibencoding=utf8,
-         natbib=true,
-         hyperref=true,
-         backref=true,
-         urldate=long,
-         style=ieee,
-         sorting=none
-    ]{biblatex}
+  \RequirePackage[
+    backend=biber,
+    bibencoding=utf8,
+    natbib=true,
+    hyperref=true,
+    backref=true,
+    urldate=long,
+    style=ieee,
+    sorting=none
+  ]{biblatex}
 
-    \DefineBibliographyStrings{english} {
-        backrefpage  = {p.},
-        backrefpages = {pp.},
-        bibliography = {References}
-    }
+  \DefineBibliographyStrings{english} {
+    backrefpage  = {p.},
+    backrefpages = {p.},
+    bibliography = {References}
+  }
 }
 
 % Trigger references page
 \DeclareDocumentCommand{\references}{ O{} }{
-    \appendix
-    {
+  \appendix
+  {
     \ifthenelse{\equal{#1}{small}}{
-    	\renewcommand*{\bibfont}{\footnotesize}
-     	\linespread{1.0}
-     	\setlength\itemsep{1ex}
-     	\setlength\bibitemsep{0.7\itemsep}
-     }{}
+      \renewcommand*{\bibfont}{\footnotesize}
+      \linespread{1.0}
+      \setlength\itemsep{1ex}
+      \setlength\bibitemsep{0.7\itemsep}
+    }{}
 
     \pagestyle{maincontentstyle}
     \printbibliography[heading=bibnumbered]
-    }
+  }
 }
 
 \setstretch{1}
@@ -134,46 +134,47 @@ footskip=1cm
 
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{
-\markboth{
-\footnotesize
-{#1}
-}{}
+  \markboth{
+    \footnotesize
+    {#1}
+  }{}
 }
+
 \renewcommand{\sectionmark}[1]{
-\markright{
-\footnotesize
-{\textbf{\thesection}}
-\quad
-{#1}
-}
+  \markright{
+    \footnotesize
+    {\textbf{\thesection}}
+    \quad
+    {#1}
+  }
 }
 
 % Footer for non-content pages (abstract etc)
 \fancypagestyle{plain} {
-    \fancyfoot{}
-    \fancyhead{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot{}
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
 
-    \fancyfootoffset[R]{1.75cm}
-    \fancyfoot[R]{
-        \footnotesize
-        \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
-    }
+  \fancyfootoffset[R]{1.75cm}
+  \fancyfoot[R]{
+    \footnotesize
+    \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
+  }
 }
 
 % Footer for content pages
 \fancypagestyle{maincontentstyle} {
-    \fancyfoot{}
-    \fancyhead{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot{}
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
 
-\fancyfootoffset[R]{1.75cm}
-    \fancyfoot[R]{
-        \footnotesize
-        \leftmark\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
-	}
+  \fancyfootoffset[R]{1.75cm}
+  \fancyfoot[R]{
+    \footnotesize
+    \leftmark\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
+  }
 }
 
 % Caption Setup
@@ -183,15 +184,10 @@ labelfont=bf,
 labelsep=endash
 ]{caption}
 
-\newcommand*{\ctSetFont}[3]{
-arg1=#1, arg2=#2, arg3=#3
-}
+\newcommand*{\ctSetFont}[3]{arg1=#1, arg2=#2, arg3=#3}
 
 % Font Setup
 \newcommand{\chapterfont}{\huge\selectfont\raggedright}
-\newcommand{\sectionfont}{\LARGE\bfseries\raggedright}
-\newcommand{\subsectionfont}{\Large}
-\newcommand{\paragraphfont}{\small\bfseries}
 
 \RequirePackage{titlesec}
 
@@ -3490,14 +3486,14 @@ arg1=#1, arg2=#2, arg3=#3
 % PDF Setup
 \renewcommand{\maketitle}{
 \hypersetup{
-pdftitle={\@title},
-pdfsubject={\@scheme},
-pdfauthor={\@author},
-plainpages=false,
-pdfborder={0 0 0},
-breaklinks=true,
-bookmarksnumbered=true,
-bookmarksopen=true
+  pdftitle={\@title},
+  pdfsubject={\@scheme},
+  pdfauthor={\@author},
+  plainpages=false,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  bookmarksnumbered=true,
+  bookmarksopen=true
 }
 
 \pagenumbering{gobble}
@@ -3547,100 +3543,102 @@ Degree of \degree\ in \@scheme.\par
 % Statements Page
 \RequirePackage{framed}
 \DeclareDocumentCommand{\statements}{ O{} }{
-    \pagestyle{plain}
-    \pagenumbering{roman}
-    \ifthenelse{\equal{#1}{}}{
-        \newcommand{\sig}{\vspace{2cm}}
-    }{
-        \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
-    }
-    \cleardoublepage
-    \pdfbookmark[0]{Statement of Originality \& Availability}{Statements}
-    \label{chp:statements}
-    {
-    \setstretch{1.2}
-    \null\vfill
-    \begin{framed}
-        {\noindent\bf Statement of Originality}\\
-        \\
-        The work presented in this report is entirely from the studies of the individual student,
-        except where otherwise stated. Where derivations are presented and the origin of the work
-        is either wholly or in part from other sources, then full reference is given to the original
-        author. This work has not been presented previously for any degree, nor is it at present
-        under consideration by any other degree awarding body.
+  \pagestyle{plain}
+  \pagenumbering{roman}
+  \ifthenelse{\equal{#1}{}}{
+    \newcommand{\sig}{\vspace{2cm}}
+  }{
+    \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
+  }
+  \cleardoublepage
+  \pdfbookmark[0]{Statement of Originality \& Availability}{Statements}
+  \label{chp:statements}
 
-        \vspace{0.3cm}
+  {\setstretch{1.2}
+  \null\vfill
+  \begin{framed}
+    {\noindent\bf Statement of Originality}\\
+    \\
+    The work presented in this report is entirely from the studies of the individual student,
+    except where otherwise stated. Where derivations are presented and the origin of the work
+    is either wholly or in part from other sources, then full reference is given to the original
+    author. This work has not been presented previously for any degree, nor is it at present
+    under consideration by any other degree awarding body.
 
-        \noindent Student:
+    \vspace{0.3cm}
 
-        \sig
+    \noindent Student:
 
-        \noindent\@author
+    \sig
+
+    \noindent\@author
     \end{framed}
+
     \vfill
+
     \begin{framed}
-        {\noindent\bf Statement of Availability}\\
-        \\
-        I hereby acknowledge the availability of any part of this report for viewing, photocopying
-        or incorporation into future studies, providing that full reference is given to the origins
-        of any information contained herein.
+      {\noindent\bf Statement of Availability}\\
+      \\
+      I hereby acknowledge the availability of any part of this report for viewing, photocopying
+      or incorporation into future studies, providing that full reference is given to the origins
+      of any information contained herein.
 
-        \vspace{0.3cm}
+      \vspace{0.3cm}
 
-        \noindent Student:
+      \noindent Student:
 
-        \sig
+      \sig
 
-        \noindent\@author
-    \end{framed}
-    \vfill
-    }
+      \noindent\@author
+  \end{framed}
+
+  \vfill
+  }
 }
 
 % Figures/Tables/Contents Pages
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
-    \cleardoublepage
-    \setcounter{tocdepth}{3}
-    {\setstretch{1.4}
+  \cleardoublepage
+  \setcounter{tocdepth}{3}
+  {
+    \setstretch{1.4}
     \tableofcontents
     \iftotalfigures
-        \cleardoublepage
-        \listoffigures
+      \cleardoublepage
+      \listoffigures
     \fi
     \iftotaltables
-        \cleardoublepage
-        \listoftables
-    \fi}
+      \cleardoublepage
+      \listoftables
+    \fi
+  }
 }
 
 % Switch context to main content body
 \newcommand{\content}{
-	\setstretch{1.5}
-    \cleardoublepage
-    \pagenumbering{arabic}
-    \setcounter{page}{1}
-    \pagestyle{maincontentstyle}
+  \setstretch{1.5}
+  \cleardoublepage
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+  \pagestyle{maincontentstyle}
 }
 
 % Abstract
-\renewenvironment{abstract}
-    {
-        \cleardoublepage
-        \pdfbookmark[0]{Abstract}{Abstract}
-        \chapter*{\abstractname}\label{chp:abstract}
-        \setstretch{1.5}
-    }
-    {}
+\renewenvironment{abstract}{
+  \cleardoublepage
+  \pdfbookmark[0]{Abstract}{Abstract}
+  \chapter*{\abstractname}\label{chp:abstract}
+  \setstretch{1.5}
+}{}
 
 % Acknowledgements
 \DeclareDocumentCommand{\acknowledgements}{ m }{
-    \cleardoublepage
-    \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
-    \chapter*{Acknowledgements}
-    \setstretch{1.5}
-    \label{chp:acknowledgement}
-
-    #1
+  \cleardoublepage
+  \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
+  \chapter*{Acknowledgements}
+  \setstretch{1.5}
+  \label{chp:acknowledgement}
+  #1
 }
 \endinput
