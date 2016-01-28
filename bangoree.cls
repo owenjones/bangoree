@@ -1,4 +1,5 @@
 % BangorEE - (an unofficial) Bangor Electronic Engineering Dissertation LaTeX Class.
+% https://github.com/owenjones/bangoree
 
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
@@ -79,6 +80,7 @@
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 
+% Geometry Setup
 \RequirePackage[
   paper=a4paper,
   nohead,
