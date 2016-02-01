@@ -94,7 +94,7 @@
 ]{geometry}
 
 % References Setup
-\DeclareDocumentCommand{\bibinit}{ O{} }{
+\DeclareDocumentCommand{\bibinit}{}{
   \RequirePackage[
     backend=biber,
     bibencoding=utf8,
@@ -110,22 +110,6 @@
     backrefpage  = {p.},
     backrefpages = {p.},
     bibliography = {References}
-  }
-}
-
-% Trigger references page
-\DeclareDocumentCommand{\references}{ O{} }{
-  \appendix
-  {
-    \ifthenelse{\equal{#1}{small}}{
-      \renewcommand*{\bibfont}{\footnotesize}
-      \linespread{1.0}
-      \setlength\itemsep{1ex}
-      \setlength\bibitemsep{0.7\itemsep}
-    }{}
-
-    \pagestyle{maincontentstyle}
-    \printbibliography[heading=bibnumbered]
   }
 }
 
@@ -3600,6 +3584,23 @@ Degree of \degree\ in \@scheme.\par
   }
 }
 
+% Abstract
+\renewenvironment{abstract}{
+  \cleardoublepage
+  \pdfbookmark[0]{Abstract}{Abstract}
+  \chapter*{\abstractname}\label{chp:abstract}
+  \setstretch{1.5}
+}{}
+
+% Acknowledgements
+\DeclareDocumentCommand{\acknowledgements}{ m }{
+  \cleardoublepage
+  \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
+  \chapter*{Acknowledgements}\label{chp:acknowledgement}
+  \setstretch{1.5}
+  #1
+}
+
 % Figures/Tables/Contents Pages
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
@@ -3607,13 +3608,16 @@ Degree of \degree\ in \@scheme.\par
   \setcounter{tocdepth}{3}
   {
     \setstretch{1.4}
+    \pdfbookmark[0]{Contents}{contents}
     \tableofcontents
     \iftotalfigures
       \cleardoublepage
+      \pdfbookmark[0]{List of Figures}{lof}
       \listoffigures
     \fi
     \iftotaltables
       \cleardoublepage
+      \pdfbookmark[0]{List of Tables}{lot}
       \listoftables
     \fi
   }
@@ -3628,21 +3632,12 @@ Degree of \degree\ in \@scheme.\par
   \pagestyle{maincontentstyle}
 }
 
-% Abstract
-\renewenvironment{abstract}{
+% References Page
+\DeclareDocumentCommand{\references}{ O{} }{
   \cleardoublepage
-  \pdfbookmark[0]{Abstract}{Abstract}
-  \chapter*{\abstractname}\label{chp:abstract}
-  \setstretch{1.5}
-}{}
-
-% Acknowledgements
-\DeclareDocumentCommand{\acknowledgements}{ m }{
-  \cleardoublepage
-  \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
-  \chapter*{Acknowledgements}
-  \setstretch{1.5}
-  \label{chp:acknowledgement}
-  #1
+  \pagestyle{maincontentstyle}
+  \label{chp:references}
+  \printbibliography
+  \addcontentsline{toc}{chapter}{References}
 }
 \endinput
