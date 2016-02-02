@@ -159,7 +159,7 @@
   \fancyfootoffset[R]{1.75cm}
   \fancyfoot[R]{
     \footnotesize
-    \leftmark\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}%
+    \nouppercase{\leftmark}\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
   }
 }
 
