@@ -76,7 +76,7 @@
   \RequirePackage{indentfirst}
 \fi
 
-\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx,setspace}
+\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 
@@ -114,6 +114,7 @@
 }
 
 \setstretch{1}
+\setlist{nosep}
 \clubpenalty = 10000
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
@@ -180,9 +181,10 @@ labelsep=endash
 \titleformat{\chapter}[display]
 {\huge\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 
-\titlespacing*{\chapter}{0pt}{2mm}{4mm}
-%\titlespacing*{\section}{0pt}{0mm}{-2mm}
-%\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
+\titlespacing*{\chapter}{0pt}{2mm}{2mm}
+\titlespacing*{\section}{0pt}{0mm}{-2mm}
+\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
+\titlespacing*{\subsubsection}{0pt}{0mm}{-2mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
