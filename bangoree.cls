@@ -3636,9 +3636,7 @@ Degree of \degree\ in \@scheme.\par
 % Abbreviations Page
 \newcommand{\abbreviations}{
 	\pdfbookmark[0]{Abbreviations}{Abbreviations}
-	%\setstretch{1.4}
 	\printnomenclature\label{chp:abbreviations}
-	%\addcontentsline{toc}{chapter}{Abbreviations}
 	\newpage
 }
 
