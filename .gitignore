@@ -158,4 +158,7 @@ pythontex-files-*/
 # Latexian
 TSWLatexianTemp*
 
+# Nomenclature Index
+*.nls
+
 *.DS_Store
