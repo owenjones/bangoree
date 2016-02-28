@@ -3611,6 +3611,12 @@ Degree of \degree\ in \@scheme.\par
   #1
 }
 
+% Abbreviations Page
+\newcommand{\abbreviations}{
+	\pdfbookmark[0]{Abbreviations}{Abbreviations}
+	\printnomenclature\label{chp:abbreviations}
+}
+
 % Figures/Tables/Contents Pages
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
@@ -3631,13 +3637,7 @@ Degree of \degree\ in \@scheme.\par
       \listoftables
     \fi
   }
-}
-
-% Abbreviations Page
-\newcommand{\abbreviations}{
-	\pdfbookmark[0]{Abbreviations}{Abbreviations}
-	\printnomenclature\label{chp:abbreviations}
-	\newpage
+  \abbreviations
 }
 
 % Switch context to main content body
