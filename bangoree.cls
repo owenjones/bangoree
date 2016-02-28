@@ -79,6 +79,7 @@
 \RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
+\RequirePackage[intoc]{nomencl}
 
 % Geometry Setup
 \RequirePackage[
@@ -112,6 +113,13 @@
     bibliography = {References}
   }
 }
+
+% Abbreviations Setup
+\let\abbrv\nomenclature
+\renewcommand{\nomname}{Abbreviations}
+\setlength{\nomitemsep}{-\parsep}
+\setlength{\nomlabelwidth}{1.5cm}
+\makenomenclature
 
 \setstretch{1}
 \setlist{nosep}
@@ -3623,6 +3631,15 @@ Degree of \degree\ in \@scheme.\par
       \listoftables
     \fi
   }
+}
+
+% Abbreviations Page
+\newcommand{\abbreviations}{
+	\pdfbookmark[0]{Abbreviations}{Abbreviations}
+	%\setstretch{1.4}
+	\printnomenclature\label{chp:abbreviations}
+	%\addcontentsline{toc}{chapter}{Abbreviations}
+	\newpage
 }
 
 % Switch context to main content body
