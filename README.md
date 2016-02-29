@@ -26,14 +26,13 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``\course{<Electronic Engineering|Computer Systems Engineering>}`` - Sets the name of your course, which is printed on the title page.
 * ``\supervisor{<supervisor>}`` - Adds a supervisor. For multiple supervisors call this macro multiple times.
 * ``\tables`` - Generates the contents, figures, and tables pages.
-* ``\abbreviations`` - Generates an abbreviations page (see abbreviations section below)
 * ``\abbrv{<abbreviation>}{<definition>}`` - Adds an abbreviation to the abbreviations page
 * ``\bibinit`` and ``\addbibresource{<bibliography>}`` - Setup the bibliography.
 * ``\content`` - Marks the point at which the main document body begins.
 * ``\references`` - Creates the references pages.
 
 ##Abbreviations
-This package has the ability to generate an abbreviations page, using the ``\abbrv`` and ``\abbreviations`` macros mentioned above.
+This package has the ability to generate an abbreviations page, using the ``\abbrv`` macros mentioned abov.
 
 After typesetting the document run the command ``makeindex <document title>.nlo -s nomencl.ist -o <document title>.nls`` to sort the abbreviations, then typeset your document again.
 
