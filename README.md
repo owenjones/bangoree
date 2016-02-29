@@ -32,7 +32,7 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``\references`` - Creates the references pages.
 
 ##Abbreviations
-This package has the ability to generate an abbreviations page, using the ``\abbrv`` macros mentioned abov.
+This package has the ability to generate an abbreviations page, using the ``\abbrv`` macros mentioned above.
 
 After typesetting the document run the command ``makeindex <document title>.nlo -s nomencl.ist -o <document title>.nls`` to sort the abbreviations, then typeset your document again.
 
