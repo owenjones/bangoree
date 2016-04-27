@@ -3621,7 +3621,7 @@ Degree of \degree\ in \@scheme.\par
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
   \cleardoublepage
-  \setcounter{tocdepth}{3}
+  \setcounter{tocdepth}{1}
   {
     \setstretch{1.4}
     \pdfbookmark[0]{Contents}{contents}
