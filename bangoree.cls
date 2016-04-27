@@ -115,6 +115,7 @@
 }
 
 % Abbreviations Setup
+\let\abbrv\nomenclature
 \renewcommand{\nomname}{Abbreviations}
 \setlength{\nomitemsep}{-\parsep}
 \setlength{\nomlabelwidth}{1.5cm}
@@ -3608,12 +3609,6 @@ Degree of \degree\ in \@scheme.\par
   \chapter*{Acknowledgements}\label{chp:acknowledgement}
   \setstretch{1.5}
   #1
-}
-
-% Abbreviations Command
-\DeclareDocumentCommand{\abbrv}{ m m }{
-	\nomenclature{#1}{#2}
-	#2 (#1)
 }
 
 % Abbreviations Page
