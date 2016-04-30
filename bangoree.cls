@@ -19,8 +19,6 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{xparse}
 
-\def\course#1{\def\@scheme{#1}}
-
 \RequirePackage{fifo-stack}
 
 \FSCreate{supervisors}{}
@@ -42,6 +40,15 @@
 \newboolean{@noindent}
 \setboolean{@noindent}{false}
 \DeclareOption{noindent}{\setboolean{@noindent}{true}}
+
+\newboolean{@courseinfo}
+\setboolean{@courseinfo}{false}
+\def\@coursename{\degree}
+
+\newcommand{\course}[1]{
+\setboolean{@courseinfo}{true}
+\def\@coursename{#1}
+}
 
 \ProcessOptions\relax
 
@@ -3485,7 +3492,7 @@ labelsep=endash
 \renewcommand{\maketitle}{
 \hypersetup{
   pdftitle={\@title},
-  pdfsubject={\@scheme},
+  pdfsubject={\@coursename},
   pdfauthor={\@author},
   plainpages=false,
   pdfborder={0 0 0},
@@ -3519,7 +3526,7 @@ labelsep=endash
 
 {\footnotesize\setstretch{1.2}
 Submitted in partial satisfaction of the requirements for the \\
-Degree of \degree\ in \@scheme.\par
+Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 }
 
 \vspace{0.8cm}
