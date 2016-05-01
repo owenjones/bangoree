@@ -11,6 +11,7 @@
 
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
+\RequirePackage{xstring}
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{draftwatermark}
 \RequirePackage[T1]{fontenc}
@@ -48,6 +49,20 @@
 \newcommand{\course}[1]{
 \setboolean{@courseinfo}{true}
 \def\@coursename{#1}
+}
+
+\newboolean{@partnerlogo}
+\setboolean{@partnerlogo}{false}
+
+\newcommand{\partner}[2][XX]{
+	\setboolean{@partnerlogo}{true}
+	\IfStrEq{#1}{XX}{
+		\def\@partnerlogospace{\vfill}
+	}{
+		\def\@partnerlogospace{\vspace*{#1}}
+	}
+	
+	\def\@partnerlogoinner{#2}
 }
 
 \ProcessOptions\relax
@@ -3521,6 +3536,11 @@ labelsep=endash
 \vspace{0.1cm}
 
 {\setstretch{1.2}School of Electronic Engineering \\ College of Physical and Applied Sciences\par}
+
+\if@partnerlogo
+	\@partnerlogospace
+	\@partnerlogoinner
+\fi
 
 \vfill
 
