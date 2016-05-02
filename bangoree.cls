@@ -67,14 +67,13 @@
 \setboolean{@partnerlogo}{false}
 
 \newcommand{\partner}[2][XX]{
-	\setboolean{@partnerlogo}{true}
-	\IfStrEq{#1}{XX}{
-		\def\@partnerlogospace{\vfill}
-	}{
-		\def\@partnerlogospace{\vspace*{#1}}
-	}
-	
-	\def\@partnerlogoinner{#2}
+  \setboolean{@partnerlogo}{true}
+  \IfStrEq{#1}{XX}{
+    \def\@partnerlogospace{\vfill}
+  }{
+    \def\@partnerlogospace{\vspace*{#1}}
+  }
+  \def\@partnerlogoinner{#2}
 }
 
 \if@draft
