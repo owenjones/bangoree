@@ -19,7 +19,7 @@
 \RequirePackage[UKenglish]{isodate}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{xparse}
-
+\RequirePackage{emptypage}
 \RequirePackage{fifo-stack}
 
 \FSCreate{supervisors}{}
@@ -41,6 +41,18 @@
 \newboolean{@noindent}
 \setboolean{@noindent}{false}
 \DeclareOption{noindent}{\setboolean{@noindent}{true}}
+
+\DeclareOption{twosided}{
+  \PassOptionsToClass{twoside,openright}{report}
+}
+
+\ProcessOptions\relax
+
+\ifx\degree\undefined
+  \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
+\fi
+
+\LoadClass[12pt]{report}
 
 \newboolean{@courseinfo}
 \setboolean{@courseinfo}{false}
@@ -64,14 +76,6 @@
 	
 	\def\@partnerlogoinner{#2}
 }
-
-\ProcessOptions\relax
-
-\ifx\degree\undefined
-  \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
-\fi
-
-\LoadClass[12pt]{report}
 
 \if@draft
   \SetWatermarkText{DRAFT}
@@ -157,26 +161,19 @@
   }{}
 }
 
-\renewcommand{\sectionmark}[1]{
-  \markright{
-    \footnotesize
-    {\textbf{\thesection}}
-    \quad
-    {#1}
-  }
-}
-
 % Footer for non-content pages (abstract etc)
 \fancypagestyle{plain} {
   \fancyfoot{}
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-
-  \fancyfootoffset[R]{1.75cm}
-  \fancyfoot[R]{
-    \footnotesize
-    \hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
+  
+  \fancyfoot[RO]{
+    \small\textbf{\thepage}
+  }
+    
+  \fancyfoot[LE]{
+    \small\textbf{\thepage}
   }
 }
 
@@ -186,11 +183,13 @@
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-
-  \fancyfootoffset[R]{1.75cm}
-  \fancyfoot[R]{
-    \footnotesize
-    \nouppercase{\leftmark}\hspace*{9pt}\makebox[1.4cm][l]{\textbf{\thepage}}
+  
+  \fancyfoot[RO]{
+    \small\nouppercase{\leftmark}\hspace*{9pt}\textbf{\thepage}
+  }
+    
+  \fancyfoot[LE]{
+    \small\textbf{\thepage}\hspace*{9pt}\nouppercase{\leftmark}
   }
 }
 
@@ -3568,6 +3567,7 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 % Statements Page
 \RequirePackage{framed}
 \DeclareDocumentCommand{\statements}{ O{} }{
+  \cleardoublepage
   \pagestyle{plain}
   \pagenumbering{roman}
   \ifthenelse{\equal{#1}{}}{
