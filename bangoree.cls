@@ -4,10 +4,10 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{0.1}
+\def\version{1.0}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bangoree}[2016/01/26 \version]
+\ProvidesClass{bangoree}[2016/05/03 \version]
 
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
