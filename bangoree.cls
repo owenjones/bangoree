@@ -202,12 +202,14 @@ labelsep=endash
 \newcommand*{\ctSetFont}[3]{arg1=#1, arg2=#2, arg3=#3}
 
 % Font Setup
-\newcommand{\chapterfont}{\huge\selectfont\raggedright}
+\newcommand{\chapterfont}{\huge\selectfont\raggedright\setstretch{1.5}}
+\newcommand{\sectionfont}{\Large\bfseries\raggedright\setstretch{1}}
 
 \RequirePackage{titlesec}
 
 \titleformat{\chapter}[display]
-{\huge\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
+{\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
+\titleformat*{\section}{\sectionfont}{}{}
 
 \titlespacing*{\chapter}{0pt}{2mm}{2mm}
 \titlespacing*{\section}{0pt}{0mm}{-2mm}
