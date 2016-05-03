@@ -167,12 +167,14 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   
+  \fancyfootoffset[L,R]{1cm}
+  
   \fancyfoot[RO]{
-    \small\textbf{\thepage}
+    \small\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
     
   \fancyfoot[LE]{
-    \small\textbf{\thepage}
+    \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}
   }
 }
 
@@ -183,12 +185,14 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   
+  \fancyfootoffset[L,R]{1cm}
+  
   \fancyfoot[RO]{
-    \small\nouppercase{\leftmark}\hspace*{9pt}\textbf{\thepage}
+    \small\nouppercase{\leftmark}\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
     
   \fancyfoot[LE]{
-    \small\textbf{\thepage}\hspace*{9pt}\nouppercase{\leftmark}
+    \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}\nouppercase{\leftmark}
   }
 }
 
