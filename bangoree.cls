@@ -38,9 +38,9 @@
 \setboolean{@nohyphen}{false}
 \DeclareOption{nohyphen}{\setboolean{@nohyphen}{true}}
 
-\newboolean{@noindent}
-\setboolean{@noindent}{false}
-\DeclareOption{noindent}{\setboolean{@noindent}{true}}
+\newboolean{@indent}
+\setboolean{@indent}{false}
+\DeclareOption{indent}{\setboolean{@indent}{true}}
 
 \newboolean{@twosided}
 \setboolean{@twosided}{false}
@@ -97,11 +97,11 @@
 \RequirePackage{parskip}
 \setlength{\parskip}{1.25em}
 
-\if@noindent
-  \setlength{\parindent}{0in}
-\else
+\if@indent
   \setlength{\parindent}{15pt}
   \RequirePackage{indentfirst}
+\else
+  \setlength{\parindent}{0in}
 \fi
 
 \RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx,tocbibind}
