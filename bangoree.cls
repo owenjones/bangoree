@@ -4,7 +4,7 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.0}
+\def\version{1.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/05/03 \version]
@@ -42,7 +42,10 @@
 \setboolean{@noindent}{false}
 \DeclareOption{noindent}{\setboolean{@noindent}{true}}
 
+\newboolean{@twosided}
+\setboolean{@twosided}{false}
 \DeclareOption{twosided}{
+  \setboolean{@twosided}{true}
   \PassOptionsToClass{twoside,openright}{report}
 }
 
@@ -167,15 +170,19 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   
-  \fancyfootoffset[L,R]{1cm}
+  \fancyfootoffset[RO]{1cm}
   
   \fancyfoot[RO]{
     \small\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
-    
-  \fancyfoot[LE]{
-    \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}
-  }
+  
+  \if@twosided
+    \fancyfootoffset[LE]{1cm}
+  
+    \fancyfoot[LE]{
+      \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}
+    }
+  \fi
 }
 
 % Footer for content pages
@@ -185,15 +192,19 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   
-  \fancyfootoffset[L,R]{1cm}
+  \fancyfootoffset[RO]{1cm}
   
   \fancyfoot[RO]{
     \small\nouppercase{\leftmark}\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
+   
+  \if@twosided 
+    \fancyfootoffset[LE]{1cm}
     
-  \fancyfoot[LE]{
-    \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}\nouppercase{\leftmark}
-  }
+    \fancyfoot[LE]{
+      \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}\nouppercase{\leftmark}
+    }
+  \fi
 }
 
 % Caption Setup
