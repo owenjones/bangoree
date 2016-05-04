@@ -7,7 +7,7 @@
 \def\version{1.1}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bangoree}[2016/05/03 \version]
+\ProvidesClass{bangoree}[2016/05/05 \version]
 
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
