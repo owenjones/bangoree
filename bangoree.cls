@@ -3533,6 +3533,7 @@ labelsep=endash
 \pagestyle{empty}
 
 % Title Page
+\hypersetup{pageanchor=false}
 \begin{titlepage}
 \pdfbookmark[0]{Title Page}{Title Page}
 \centering
@@ -3576,6 +3577,7 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 \@date}
 
 \end{titlepage}
+\hypersetup{pageanchor=true}
 }
 
 % Statements Page
