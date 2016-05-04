@@ -15,7 +15,7 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``meng`` - Sets degree to **Master of Engineering**
 
 ##Optional Class Options
-* ``noindent`` - Prevents indentation of the first line of each paragraph
+* ``indent`` - Indents the first line of each paragraph
 * ``nohyphen`` - Attempts to prevent words becoming hyphenated
 * ``draft`` - Places a DRAFT watermark across the document
 * ``twosided`` - Adjusts margins and inserts blank pages to allow the document to be printed double sided
@@ -29,7 +29,6 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``\partner[<vertical spacing>]{<content>}`` - Adds content to the title page, underneath the Bangor logo and school information. If a vertical spacing is omitted the content is centred between the crest and degree information.
 * ``\tables`` - Generates the contents, figures, and tables pages.
 * ``\abbrv{<abbreviation>}{<definition>}`` - Adds an abbreviation to the abbreviations page
-* ``\bibinit`` - Setup the bibliography.
 * ``\content`` - Marks the point at which the main document body begins.
 * ``\references`` - Creates the references pages.
 
