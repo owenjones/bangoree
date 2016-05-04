@@ -123,23 +123,21 @@
 ]{geometry}
 
 % References Setup
-\DeclareDocumentCommand{\bibinit}{}{
-  \RequirePackage[
-    backend=biber,
-    bibencoding=utf8,
-    natbib=true,
-    hyperref=true,
-    backref=true,
-    urldate=long,
-    style=ieee,
-    sorting=none
-  ]{biblatex}
+\RequirePackage[
+  backend=biber,
+  bibencoding=utf8,
+  natbib=true,
+  hyperref=true,
+  backref=true,
+  urldate=long, 
+  style=ieee,
+  sorting=none
+]{biblatex}
 
-  \DefineBibliographyStrings{english} {
-    backrefpage  = {p.},
-    backrefpages = {p.},
-    bibliography = {References}
-  }
+\DefineBibliographyStrings{english} {
+  backrefpage  = {p.},
+  backrefpages = {p.},
+  bibliography = {References}
 }
 
 % Abbreviations Setup
