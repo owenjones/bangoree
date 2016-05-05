@@ -104,7 +104,8 @@
   \setlength{\parindent}{0in}
 \fi
 
-\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx,tocbibind}
+\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
+\RequirePackage[nottoc]{tocbibind}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 \RequirePackage[intoc]{nomencl}
