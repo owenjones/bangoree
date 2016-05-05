@@ -4,7 +4,7 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1.1}
+\def\version{1.1.2}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/05/05 \version]
@@ -123,21 +123,25 @@
 ]{geometry}
 
 % References Setup
-\RequirePackage[
-  backend=biber,
-  bibencoding=utf8,
-  natbib=true,
-  hyperref=true,
-  backref=true,
-  urldate=long, 
-  style=ieee,
-  sorting=none
-]{biblatex}
+\newcommand{\usebibliography}[1]{
+  \RequirePackage[
+    backend=biber,
+    bibencoding=utf8,
+    natbib=true,
+    hyperref=true,
+    backref=true,
+    urldate=long, 
+    style=ieee,
+    sorting=none
+  ]{biblatex}
 
-\DefineBibliographyStrings{english} {
-  backrefpage  = {p.},
-  backrefpages = {p.},
-  bibliography = {References}
+  \DefineBibliographyStrings{english} {
+    backrefpage  = {p.},
+    backrefpages = {p.},
+    bibliography = {References}
+  }
+  
+  \addbibresource{#1}
 }
 
 % Abbreviations Setup
