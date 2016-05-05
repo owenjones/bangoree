@@ -3717,10 +3717,13 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 
 % References Page
 \DeclareDocumentCommand{\references}{ O{} }{
-  \cleardoublepage
-  \pagestyle{maincontentstyle}
-  \label{chp:references}
-  \printbibliography
-  \addcontentsline{toc}{chapter}{References}
+  \ifx \printbibliography \undefined
+  \else
+    \cleardoublepage
+    \pagestyle{maincontentstyle}
+    \label{chp:references}
+    \printbibliography
+    \addcontentsline{toc}{chapter}{References}
+  \fi
 }
 \endinput
