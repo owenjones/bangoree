@@ -1,9 +1,9 @@
 #BangorEE
 (An *unofficial*) Bangor Electronic Engineering Dissertation LaTeX Class.
 
-An preview of the output of this class can be found [**here**]("https://www.overleaf.com/read/tbbqhnhhyvzw").
+An preview of the output of this class can be found [**here**](https://www.overleaf.com/read/tbbqhnhhyvzw).
 
-This is a heavily modified version of Cameron Gray's "bangorcsthesis", the official Computer Science Thesis LaTeX Class - [bangorcsthesis]("https://www.ctan.org/pkg/bangorcsthesis?lang=en")
+This is a heavily modified version of Cameron Gray's "bangorcsthesis", the official Computer Science Thesis LaTeX Class - [bangorcsthesis](https://www.ctan.org/pkg/bangorcsthesis?lang=en)
 
 ##Usage
 * Offline - drop the ``bangoree.cls`` file into your working directory
