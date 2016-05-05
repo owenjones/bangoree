@@ -4,7 +4,7 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1}
+\def\version{1.1.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/05/05 \version]
@@ -3580,26 +3580,38 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 \hypersetup{pageanchor=true}
 }
 
+\newif\ifpreamblepagenumbers
+
+\newcommand{\preamblenumbering}{
+  \ifpreamblepagenumbers
+  \else
+    \pagestyle{plain}
+    \pagenumbering{roman}
+    \preamblepagenumberstrue
+  \fi
+}
+
 % Statements Page
 \RequirePackage{framed}
 \DeclareDocumentCommand{\statements}{ O{} }{
   \cleardoublepage
-  \pagestyle{plain}
-  \pagenumbering{roman}
+  \preamblenumbering
+  \pdfbookmark[0]{Statement of Originality \& Availability}{Statements}
+  \label{chp:statements}
+
   \ifthenelse{\equal{#1}{}}{
     \newcommand{\sig}{\vspace{2cm}}
   }{
     \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
   }
-  \cleardoublepage
-  \pdfbookmark[0]{Statement of Originality \& Availability}{Statements}
-  \label{chp:statements}
-
+  
   {\setstretch{1.2}
   \null\vfill
   \begin{framed}
-    {\noindent\bf Statement of Originality}\\
-    \\
+    \noindent\textbf{Statement of Originality}
+    
+    \vspace{0.3cm}
+    
     The work presented in this report is entirely from the studies of the individual student,
     except where otherwise stated. Where derivations are presented and the origin of the work
     is either wholly or in part from other sources, then full reference is given to the original
@@ -3618,8 +3630,10 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
     \vfill
 
     \begin{framed}
-      {\noindent\bf Statement of Availability}\\
-      \\
+      \noindent\textbf{Statement of Availability}
+      
+      \vspace{0.3cm}
+      
       I hereby acknowledge the availability of any part of this report for viewing, photocopying
       or incorporation into future studies, providing that full reference is given to the origins
       of any information contained herein.
@@ -3640,6 +3654,7 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 % Abstract
 \renewenvironment{abstract}{
   \cleardoublepage
+  \preamblenumbering
   \pdfbookmark[0]{Abstract}{Abstract}
   \chapter*{\abstractname}\label{chp:abstract}
   \setstretch{1.5}
@@ -3648,6 +3663,7 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 % Acknowledgements
 \DeclareDocumentCommand{\acknowledgements}{ m }{
   \cleardoublepage
+  \preamblenumbering
   \pdfbookmark[0]{Acknowledgements}{Acknowledgements}
   \chapter*{Acknowledgements}\label{chp:acknowledgement}
   \setstretch{1.5}
@@ -3656,14 +3672,17 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 
 % Abbreviations Page
 \newcommand{\abbreviations}{
-	\pdfbookmark[0]{Abbreviations}{Abbreviations}
-	\printnomenclature\label{chp:abbreviations}
+  \cleardoublepage
+  \preamblenumbering
+  \pdfbookmark[0]{Abbreviations}{Abbreviations}
+  \printnomenclature\label{chp:abbreviations}
 }
 
 % Figures/Tables/Contents Pages
 \RequirePackage[figure,table]{totalcount}
 \newcommand{\tables}{
   \cleardoublepage
+  \preamblenumbering
   \setcounter{tocdepth}{1}
   {
     \setstretch{1.4}
