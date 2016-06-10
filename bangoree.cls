@@ -4,7 +4,7 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1.5}
+\def\version{1.1.5a}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/06/10 \version]
@@ -140,7 +140,7 @@
 % References Setup
 \newcommand{\usebibliography}[1]{
   \RequirePackage[
-    backend=bibtex,
+    backend=biber,
     bibencoding=utf8,
     natbib=true,
     hyperref=true,
