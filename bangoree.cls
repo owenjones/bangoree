@@ -4,7 +4,7 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1.5a}
+\def\version{1.1.6}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/06/10 \version]
@@ -56,7 +56,7 @@
 \ProcessOptions\relax
 
 \ifx\degree\undefined
-  \ClassError{bangoree}{A degree type has not been specified; please use bsc, msc, beng or meng in the class options.}
+  \ClassError{bangoree}{A degree type has not been specified: please use bsc, msc, beng or meng in the class options}
 \fi
 
 \LoadClass[12pt]{report}
@@ -109,6 +109,9 @@
 \fi
 
 \if@nooffset
+  \if@twosided
+    \ClassError{bangoree}{Option clash: nooffset and twosided should not be active at the same time}
+  \fi
   \newcommand{\bindingoffset}{0mm}
   \newcommand{\leftm}{27.5mm}
   \newcommand{\rightm}{27.5mm}
