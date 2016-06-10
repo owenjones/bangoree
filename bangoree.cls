@@ -4,10 +4,10 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1.2}
+\def\version{1.1.5}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bangoree}[2016/05/05 \version]
+\ProvidesClass{bangoree}[2016/05/19 \version]
 
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
@@ -48,6 +48,10 @@
   \setboolean{@twosided}{true}
   \PassOptionsToClass{twoside,openright}{report}
 }
+
+\newboolean{@nooffset}
+\setboolean{@nooffset}{false}
+\DeclareOption{nooffset}{\setboolean{@nooffset}{true}}
 
 \ProcessOptions\relax
 
@@ -104,6 +108,16 @@
   \setlength{\parindent}{0in}
 \fi
 
+\if@nooffset
+  \newcommand{\bindingoffset}{0mm}
+  \newcommand{\leftm}{27.5mm}
+  \newcommand{\rightm}{27.5mm}
+\else
+  \newcommand{\bindingoffset}{15mm}
+  \newcommand{\leftm}{20mm}
+  \newcommand{\rightm}{20mm}
+\fi
+
 \RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
@@ -115,10 +129,10 @@
   paper=a4paper,
   nohead,
   includefoot,
-  bindingoffset=15mm,
+  bindingoffset=\bindingoffset,
   top=20mm,
-  left=20mm,
-  right=20mm,
+  left=\leftm,
+  right=\rightm,
   bottom=20mm,
   footskip=1cm
 ]{geometry}
@@ -126,7 +140,7 @@
 % References Setup
 \newcommand{\usebibliography}[1]{
   \RequirePackage[
-    backend=biber,
+    backend=bibtex,
     bibencoding=utf8,
     natbib=true,
     hyperref=true,
@@ -229,10 +243,10 @@ labelsep=endash
 {\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
 \titleformat*{\section}{\sectionfont}{}{}
 
-\titlespacing*{\chapter}{0pt}{2mm}{2mm}
-\titlespacing*{\section}{0pt}{0mm}{-2mm}
-\titlespacing*{\subsection}{0pt}{0mm}{-2mm}
-\titlespacing*{\subsubsection}{0pt}{0mm}{-2mm}
+\titlespacing*{\chapter}{0pt}{2mm}{1mm}
+\titlespacing*{\section}{0pt}{2mm}{0mm}
+\titlespacing*{\subsection}{0pt}{1mm}{-2mm}
+\titlespacing*{\subsubsection}{0pt}{1mm}{-2mm}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}

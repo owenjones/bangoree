@@ -1,9 +1,9 @@
 #BangorEE
 (An *unofficial*) Bangor Electronic Engineering Dissertation LaTeX Class.
 
-An preview of the output of this class can be found [**here**](https://www.overleaf.com/read/tbbqhnhhyvzw).
-
 This is a heavily modified version of Cameron Gray's "bangorcsthesis", the official Computer Science Thesis LaTeX Class - [bangorcsthesis](https://www.ctan.org/pkg/bangorcsthesis?lang=en)
+
+###A preview of the output of this class can be found [**here**](https://www.overleaf.com/read/tbbqhnhhyvzw).
 
 ##Usage
 * Offline - drop the ``bangoree.cls`` file into your working directory
@@ -26,6 +26,7 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 * ``indent`` - Indents the first line of each paragraph
 * ``nohyphen`` - Attempts to prevent words becoming hyphenated
 * ``draft`` - Places a DRAFT watermark across the document
+* ``nooffset`` - Removes the binding offset and equalises margins, to produce a version of the document to be published online
 * ``twosided`` - Adjusts margins and inserts blank pages to allow the document to be printed double sided
 
 ##Class Macros
