@@ -1,10 +1,11 @@
+% vim=latex
 % BangorEE - (an unofficial) Bangor Electronic Engineering Dissertation LaTeX Class.
 % https://github.com/owenjones/bangoree
 
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.2}
+\def\version{1.2.1}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bangoree}[2016/06/14 \version]
@@ -65,18 +66,18 @@
 \fi
 
 \if@twosided
-  \RequirePackage{emptypage}
   \PassOptionsToClass{twoside,openright}{report}
+  \RequirePackage{emptypage}
 \fi
 
 \if@nooffset
-  \newcommand{\bindingoffset}{0mm}
-  \newcommand{\leftm}{27.5mm}
-  \newcommand{\rightm}{27.5mm}
+  \newcommand{\@bindingoffset}{0mm}
+  \newcommand{\@leftmargin}{27.5mm}
+  \newcommand{\@rightmargin}{27.5mm}
 \else
-  \newcommand{\bindingoffset}{15mm}
-  \newcommand{\leftm}{20mm}
-  \newcommand{\rightm}{20mm}
+  \newcommand{\@bindingoffset}{15mm}
+  \newcommand{\@leftmargin}{20mm}
+  \newcommand{\@rightmargin}{20mm}
 \fi
 
 \def\@coursename{\degree}
@@ -103,6 +104,7 @@
 \RequirePackage{microtype}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
+\RequirePackage{csquotes}
 \RequirePackage{enumitem}
 \RequirePackage{amsmath}
 \RequirePackage{mathptmx}
@@ -120,10 +122,10 @@
   paper=a4paper,
   nohead,
   includefoot,
-  bindingoffset=\bindingoffset,
+  bindingoffset=\@bindingoffset,
   top=20mm,
-  left=\leftm,
-  right=\rightm,
+  left=\@leftmargin,
+  right=\@rightmargin,
   bottom=20mm,
   footskip=1cm
 ]{geometry}
@@ -212,29 +214,37 @@
 
 % Caption Setup
 \RequirePackage[
-font={small},
-labelfont=bf,
-labelsep=endash
+  font={small},
+  labelfont=bf,
+  labelsep=endash
 ]{caption}
 
 % Header Font Setup
-\newcommand{\chapterfont}{\huge\selectfont\raggedright\setstretch{1.5}}
-\newcommand{\sectionfont}{\Large\bfseries\raggedright\setstretch{1}}
+\newcommand{\chapterfont}{\Huge\selectfont\raggedright}
+\newcommand{\sectionfont}{\bfseries}
 
 \RequirePackage{titlesec}
 
-\titleformat{\chapter}[display]
-{\chapterfont}{\chaptertitlename\ \thechapter}{-4mm}{\Huge}
-\titleformat*{\section}{\sectionfont}{}{}
+\titleformat{\chapter}[display]{\Huge\chapterfont}{\chaptertitlename\ \thechapter}{0ex}{\Huge\setstretch{1}\raggedright}
 
-\titlespacing*{\chapter}{0pt}{2mm}{1mm}
-\titlespacing*{\section}{0pt}{2mm}{0mm}
-\titlespacing*{\subsection}{0pt}{1mm}{-2mm}
-\titlespacing*{\subsubsection}{0pt}{1mm}{-2mm}
+\titleformat{\section}[block]{\Large\sectionfont}{\thesection}{4mm}{\Large\setstretch{1}\raggedright}
+
+\titleformat{\subsection}[block]{\large\sectionfont}{\thesubsection}{4mm}{\setstretch{1}\raggedright}
+
+\titlespacing*{\chapter}{0ex}{*0}{*1}
+\titlespacing*{\section}{0ex}{*1}{*0}
+\titlespacing*{\subsection}{0ex}{*0}{*0}
+\titlespacing*{\subsubsection}{0ex}{*0}{*0}
 
 \RequirePackage{tocloft}
 \cftsetindents{figure}{0em}{3em}
 \cftsetindents{table}{0em}{3em}
+\setlength\cftbeforetoctitleskip{4ex}
+\setlength\cftbeforeloftitleskip{4ex}
+\setlength\cftbeforelottitleskip{4ex}
+\setlength\cftaftertoctitleskip{2ex}
+\setlength\cftafterloftitleskip{2ex}
+\setlength\cftafterlottitleskip{2ex}
 
 \renewcommand{\cfttoctitlefont}{\chapterfont}
 \renewcommand{\cftloftitlefont}{\chapterfont}
@@ -3548,7 +3558,7 @@ labelsep=endash
   \vspace*{0.5cm}
 
   {\Huge\textbf\@title\par}
-  {\Large\@author\par}
+  {\large\@author\par}
 
   \vfill
 
@@ -3579,11 +3589,11 @@ labelsep=endash
 
   {
     \small\setstretch{1.2}
-    \ifnum \FSSize{supervisors}>1 \textit{Supervisors} \else \textit{Supervisor} \fi
+    \ifnum \FSSize{supervisors}>1 \textit{Supervisors}\else\textit{Supervisor}\fi
     \newcounter{l}
     \forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{
       \FSBottom{supervisors}\FSShift{supervisors}
-      \ifnum \FSSize{supervisors}>0 \ \textit{and}\fi
+      \ifnum \FSSize{supervisors}>0\textit{and}\fi
     }\par
   }
 
