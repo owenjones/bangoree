@@ -4,90 +4,49 @@
 % This is a heavily modified version of Cameron Gray's "bangorcsthesis", the
 % official Computer Science Thesis LaTeX Class.
 
-\def\version{1.1.6}
+\def\version{1.2}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bangoree}[2016/06/10 \version]
+\ProvidesClass{bangoree}[2016/06/14 \version]
 
 \RequirePackage{ifthen}
 \RequirePackage{xkeyval}
 \RequirePackage{xstring}
+\RequirePackage{xparse}
 \RequirePackage[dvipsnames]{xcolor}
-\RequirePackage{draftwatermark}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[UKenglish]{babel}
 \RequirePackage[UKenglish]{isodate}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage{xparse}
-\RequirePackage{emptypage}
-\RequirePackage{fifo-stack}
 
-\FSCreate{supervisors}{}
-\def\supervisor#1{\FSPush{supervisors}{#1}}
+\newboolean{@draft}\setboolean{@draft}{false}
+\newboolean{@nohyphen}\setboolean{@nohyphen}{false}
+\newboolean{@indent}\setboolean{@indent}{false}
+\newboolean{@twosided}\setboolean{@twosided}{false}
+\newboolean{@nooffset}\setboolean{@nooffset}{false}
+\newboolean{@courseinfo}\setboolean{@courseinfo}{false}
+\newboolean{@partnerlogo}\setboolean{@partnerlogo}{false}
 
 \DeclareOption{bsc}{\newcommand{\degree}{Bachelor of Science}}
 \DeclareOption{msc}{\newcommand{\degree}{Master of Science}}
 \DeclareOption{beng}{\newcommand{\degree}{Bachelor of Engineering}}
 \DeclareOption{meng}{\newcommand{\degree}{Master of Engineering}}
-
-\newboolean{@draft}
-\setboolean{@draft}{false}
 \DeclareOption{draft}{\setboolean{@draft}{true}}
-
-\newboolean{@nohyphen}
-\setboolean{@nohyphen}{false}
 \DeclareOption{nohyphen}{\setboolean{@nohyphen}{true}}
-
-\newboolean{@indent}
-\setboolean{@indent}{false}
 \DeclareOption{indent}{\setboolean{@indent}{true}}
-
-\newboolean{@twosided}
-\setboolean{@twosided}{false}
-\DeclareOption{twosided}{
-  \setboolean{@twosided}{true}
-  \PassOptionsToClass{twoside,openright}{report}
-}
-
-\newboolean{@nooffset}
-\setboolean{@nooffset}{false}
+\DeclareOption{twosided}{\setboolean{@twosided}{true}}
 \DeclareOption{nooffset}{\setboolean{@nooffset}{true}}
-
 \ProcessOptions\relax
 
 \ifx\degree\undefined
-  \ClassError{bangoree}{A degree type has not been specified: please use bsc, msc, beng or meng in the class options}
+  \ClassError{bangoree}{A degree type has not been specified:
+  please use bsc, msc, beng or meng in the class options}
 \fi
 
-\LoadClass[12pt]{report}
-
-\newboolean{@courseinfo}
-\setboolean{@courseinfo}{false}
-\def\@coursename{\degree}
-
-\newcommand{\course}[1]{
-\setboolean{@courseinfo}{true}
-\def\@coursename{#1}
-}
-
-\newboolean{@partnerlogo}
-\setboolean{@partnerlogo}{false}
-
-\newcommand{\partner}[2][XX]{
-  \setboolean{@partnerlogo}{true}
-  \IfStrEq{#1}{XX}{
-    \def\@partnerlogospace{\vfill}
-  }{
-    \def\@partnerlogospace{\vspace*{#1}}
-  }
-  \def\@partnerlogoinner{#2}
-}
-
 \if@draft
+  \RequirePackage{draftwatermark}
   \SetWatermarkText{DRAFT}
   \SetWatermarkScale{1}
-\else
-  \SetWatermarkText{}
 \fi
 
 \if@nohyphen
@@ -98,9 +57,6 @@
   \hbadness=10000
 \fi
 
-\RequirePackage{parskip}
-\setlength{\parskip}{1.25em}
-
 \if@indent
   \setlength{\parindent}{15pt}
   \RequirePackage{indentfirst}
@@ -108,10 +64,12 @@
   \setlength{\parindent}{0in}
 \fi
 
+\if@twosided
+  \RequirePackage{emptypage}
+  \PassOptionsToClass{twoside,openright}{report}
+\fi
+
 \if@nooffset
-  \if@twosided
-    \ClassError{bangoree}{Option clash: nooffset and twosided should not be active at the same time}
-  \fi
   \newcommand{\bindingoffset}{0mm}
   \newcommand{\leftm}{27.5mm}
   \newcommand{\rightm}{27.5mm}
@@ -121,11 +79,41 @@
   \newcommand{\rightm}{20mm}
 \fi
 
-\RequirePackage{graphicx,url,csquotes,microtype,setspace,fancyhdr,enumitem,amsmath,mathptmx}
+\def\@coursename{\degree}
+\newcommand{\course}[1]{
+  \setboolean{@courseinfo}{true}
+  \def\@coursename{#1}
+}
+
+\DeclareDocumentCommand{\partner}{ O{} m }{
+  \setboolean{@partnerlogo}{true}
+  \ifthenelse{\equal{#1}{}}{
+    \def\@partnerlogospace{\vfill}
+  }{
+    \def\@partnerlogospace{\vspace*{#1}}
+  }
+  \def\@partnerlogoinner{#2}
+}
+
+\LoadClass[12pt]{report}
+
+\RequirePackage{parskip}
+\RequirePackage{graphicx}
+\RequirePackage{url}
+\RequirePackage{microtype}
+\RequirePackage{setspace}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{amsmath}
+\RequirePackage{mathptmx}
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage[hidelinks,bookmarks=true,colorlinks=false]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 \RequirePackage[intoc]{nomencl}
+\RequirePackage{fifo-stack}
+
+\FSCreate{supervisors}{}
+\def\supervisor#1{\FSPush{supervisors}{#1}}
 
 % Geometry Setup
 \RequirePackage[
@@ -148,7 +136,7 @@
     natbib=true,
     hyperref=true,
     backref=true,
-    urldate=long, 
+    urldate=long,
     style=ieee,
     sorting=none
   ]{biblatex}
@@ -158,7 +146,7 @@
     backrefpages = {p.},
     bibliography = {References}
   }
-  
+
   \addbibresource{#1}
 }
 
@@ -169,19 +157,14 @@
 \setlength{\nomlabelwidth}{1.5cm}
 \makenomenclature
 
+% Default Content Layout
+\setlength{\parskip}{1.25em}
 \setstretch{1}
 \setlist{nosep}
 \clubpenalty = 10000
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
-
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{
-  \markboth{
-    \footnotesize
-    {#1}
-  }{}
-}
 
 % Footer for non-content pages (abstract etc)
 \fancypagestyle{plain} {
@@ -189,16 +172,16 @@
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-  
+
   \fancyfootoffset[RO]{1cm}
-  
+
   \fancyfoot[RO]{
     \small\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
-  
+
   \if@twosided
     \fancyfootoffset[LE]{1cm}
-  
+
     \fancyfoot[LE]{
       \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}
     }
@@ -211,16 +194,16 @@
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-  
+
   \fancyfootoffset[RO]{1cm}
-  
+
   \fancyfoot[RO]{
     \small\nouppercase{\leftmark}\makebox[1.5cm][l]{\hspace*{0.35cm}\textbf{\thepage}}
   }
-   
-  \if@twosided 
+
+  \if@twosided
     \fancyfootoffset[LE]{1cm}
-    
+
     \fancyfoot[LE]{
       \small\makebox[1.5cm][r]{\textbf{\thepage}\hspace*{0.35cm}}\nouppercase{\leftmark}
     }
@@ -234,9 +217,7 @@ labelfont=bf,
 labelsep=endash
 ]{caption}
 
-\newcommand*{\ctSetFont}[3]{arg1=#1, arg2=#2, arg3=#3}
-
-% Font Setup
+% Header Font Setup
 \newcommand{\chapterfont}{\huge\selectfont\raggedright\setstretch{1.5}}
 \newcommand{\sectionfont}{\Large\bfseries\raggedright\setstretch{1}}
 
@@ -258,6 +239,10 @@ labelsep=endash
 \renewcommand{\cfttoctitlefont}{\chapterfont}
 \renewcommand{\cftloftitlefont}{\chapterfont}
 \renewcommand{\cftlottitlefont}{\chapterfont}
+
+\renewcommand{\chaptermark}[1]{
+  \markboth{\footnotesize{#1}}{}
+}
 
 % Bangor Logo
 \RequirePackage{tikz,forloop}
@@ -3557,47 +3542,52 @@ labelsep=endash
 % Title Page
 \hypersetup{pageanchor=false}
 \begin{titlepage}
-\pdfbookmark[0]{Title Page}{Title Page}
-\centering
+  \pdfbookmark[0]{Title Page}{Title Page}
+  \centering
 
-\vspace*{0.5cm}
+  \vspace*{0.5cm}
 
-{\setstretch{1}\huge\textbf{\@title} \\[8mm]}
-{\large\@author\par}
+  {\Huge\textbf\@title\par}
+  {\Large\@author\par}
 
-\vfill
+  \vfill
 
-\scalebox{0.4}{\bangorlogo}
+  \scalebox{0.4}{\bangorlogo}
 
-\vspace{0.1cm}
+  \vspace*{0.25cm}
 
-{\setstretch{1.2}School of Electronic Engineering \\ College of Physical and Applied Sciences\par}
+  {
+    \setstretch{1.2}
+    School of Electronic Engineering \\
+    College of Physical and Applied Sciences\par
+  }
 
-\if@partnerlogo
-	\@partnerlogospace
-	\@partnerlogoinner
-\fi
+  \if@partnerlogo
+  	\@partnerlogospace
+  	\@partnerlogoinner
+  \fi
 
-\vfill
+  \vfill
 
-{\footnotesize\setstretch{1.2}
-Submitted in partial satisfaction of the requirements for the \\
-Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
-}
+  {
+    \small\setstretch{1.2}
+    Submitted in partial satisfaction of the requirements for the \\
+    Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
+  }
 
-\vspace{0.8cm}
+  \vspace{0.8cm}
 
-{\footnotesize\setstretch{1}
+  {
+    \small\setstretch{1.2}
+    \ifnum \FSSize{supervisors}>1 \textit{Supervisors} \else \textit{Supervisor} \fi
+    \newcounter{l}
+    \forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{
+      \FSBottom{supervisors}\FSShift{supervisors}
+      \ifnum \FSSize{supervisors}>0 \ \textit{and}\fi
+    }\par
+  }
 
-\ifnum \FSSize{supervisors}>1 \textit{Supervisors} \else \textit{Supervisor} \fi
-\newcounter{l}
-\forloop[-1]{l}{\FSSize{supervisors}}{\value{l}>0}{
-\FSBottom{supervisors}\FSShift{supervisors}\ifnum \FSSize{supervisors}>0 \ \textit{and}\fi}
-
-\vspace{0.8cm}
-
-\@date}
-
+  {\small\@date\par}
 \end{titlepage}
 \hypersetup{pageanchor=true}
 }
@@ -3626,50 +3616,40 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
   }{
     \newcommand{\sig}{\includegraphics[height=2cm]{#1}}
   }
-  
-  {\setstretch{1.2}
-  \null\vfill
-  \begin{framed}
-    \noindent\textbf{Statement of Originality}
-    
-    \vspace{0.3cm}
-    
-    The work presented in this report is entirely from the studies of the individual student,
-    except where otherwise stated. Where derivations are presented and the origin of the work
-    is either wholly or in part from other sources, then full reference is given to the original
-    author. This work has not been presented previously for any degree, nor is it at present
-    under consideration by any other degree awarding body.
 
-    \vspace{0.3cm}
+  {
+    \setstretch{1.2}
+    \null\vfill
 
-    \noindent Student:
-
-    \sig
-
-    \noindent\@author
+    \begin{framed}
+      \noindent\textbf{Statement of Originality}\par
+      \vspace{0.25cm}
+      The work presented in this report is entirely from the studies of the individual student,
+      except where otherwise stated. Where derivations are presented and the origin of the work
+      is either wholly or in part from other sources, then full reference is given to the original
+      author. This work has not been presented previously for any degree, nor is it at present
+      under consideration by any other degree awarding body.\par
+      \vspace{0.25cm}
+      \noindent Student:\par
+      \sig
+      \noindent\@author
     \end{framed}
 
     \vfill
 
     \begin{framed}
-      \noindent\textbf{Statement of Availability}
-      
-      \vspace{0.3cm}
-      
+      \noindent\textbf{Statement of Availability}\par
+      \vspace{0.25cm}
       I hereby acknowledge the availability of any part of this report for viewing, photocopying
       or incorporation into future studies, providing that full reference is given to the origins
-      of any information contained herein.
-
-      \vspace{0.3cm}
-
-      \noindent Student:
-
+      of any information contained herein.\par
+      \vspace{0.25cm}
+      \noindent Student:\par
       \sig
-
       \noindent\@author
-  \end{framed}
+    \end{framed}
 
-  \vfill
+    \vfill
   }
 }
 
@@ -3735,7 +3715,7 @@ Degree of \degree\if@courseinfo \ in \@coursename\fi.\par
 
 % References Page
 \DeclareDocumentCommand{\references}{ O{} }{
-  \ifx \printbibliography \undefined
+  \ifx\printbibliography\undefined
   \else
     \cleardoublepage
     \pagestyle{maincontentstyle}
