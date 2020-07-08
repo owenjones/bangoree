@@ -7,8 +7,7 @@ This is a heavily modified version of Cameron Gray's "bangorcsthesis", the offic
 
 ## Usage
 * Offline - drop the ``bangoree.cls`` file into your working directory
-* ShareLaTeX - download the ``bangoree.cls`` file and then upload it to your project
-* Overleaf - add a new file, using the URL ``https://raw.githubusercontent.com/owenjones/bangoree/master/bangoree.cls`` - refresh this file to get the latest version
+* Overleaf - add a new file "From External URL", using the address ``https://raw.githubusercontent.com/owenjones/bangoree/master/bangoree.cls``
 
 ## Included Files
 * ``bangoree.cls`` - The Electronic Engineering class file
